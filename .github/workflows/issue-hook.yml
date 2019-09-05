@@ -1,0 +1,14 @@
+name: Issues
+
+on: [issues]
+
+jobs:
+  issue-opened:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: 'RFC Opened'
+      if: github.event.action == 'opened'
+      run: node ./.github/actions/sendToDiscord.js
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
